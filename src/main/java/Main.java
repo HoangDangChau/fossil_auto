@@ -8,5 +8,6 @@ public class Main {
 
         bmwThread.start();
         toyotaThread.start();
+
     }
 }

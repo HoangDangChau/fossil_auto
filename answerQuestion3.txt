@@ -1,0 +1,37 @@
+Question 3:
+Why is the order of outputs in 2 and 1 different? How can we make sure that the question 2 will produce the order just like question 1
+
+                                         ====================
+
+Question 3 - part 1: Why is the order of outputs in 2 and 1 different?
+=> because the code of question 1 is:
+        toyota.run();
+		...
+        bmw.run();
+	so the system will wait until toyota.run() method completely done, then bmw.run() method will be started, that is why data in output of question 1 will have data of toyota's data first then bmw's data
+
+	with question 2, we using thread:
+        bmwThread.start(); //thread 1
+        toyotaThread.start();	//thread 2
+		when thread 1 is started and the run() method inside thread 1 have just started, at this time the thread 2 also started nearly concurrent
+		so that is why output data of 2 threads ( toyota and bmw) will be merged together.
+
+                                         ====================
+
+Question 3 - part 2: How can we make sure that the question 2 will produce the order just like question 1
+=> there are a lot of ways to make sure output data of question 2 like output data of question 1
+1. the very simple way: using run() method of each thread
+		toyotaThread.run()
+		bmwThread.run()
+	    => system will print all out data of toyotaThread first then to data of bmwThread
+2. the other way: using synchronized and lockObject
+   public final static Object LOCK_OBJECT = new Object();
+   public void run() {
+           synchronized (LOCK_OBJECT) {
+               for (int i = 1; i <= 100; i++) {
+                   System.out.println("Max speed is: " + maxSpeed);
+               }
+           }
+       }
+
+...

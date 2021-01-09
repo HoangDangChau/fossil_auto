@@ -1,4 +1,5 @@
 public class Car implements Runnable {
+    public final static Object LOCK_OBJECT = new Object();
 
     public final static int WHEELS = 4;
     public final static int DOORS = 4;
@@ -24,13 +25,15 @@ public class Car implements Runnable {
     }
 
 
-    public void run(){
-        for (int i = 1; i <= 10; i++) {
-            System.out.println("Max speed is: " + maxSpeed);
+    public void run() {
+        synchronized (LOCK_OBJECT) {
+            for (int i = 1; i <= 10; i++) {
+                System.out.println("Max speed is: " + maxSpeed);
+            }
         }
     }
 
-    public void info(){
+    public void info() {
         StringBuilder sb = new StringBuilder();
         sb.append("wheels = ").append(wheels);
         sb.append("\n").append("doors = ").append(doors);
@@ -38,7 +41,6 @@ public class Car implements Runnable {
         sb.append("\n").append("maxSpeed = ").append(maxSpeed);
         System.out.println(sb.toString());
     }
-
 
 }
 
