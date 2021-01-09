@@ -1,4 +1,4 @@
-public class Car {
+public class Car implements Runnable {
 
     public final static int WHEELS = 4;
     public final static int DOORS = 4;
